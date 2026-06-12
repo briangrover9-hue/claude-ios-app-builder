@@ -5,7 +5,7 @@ set -e
 
 bold() { printf "\n\033[1m%s\033[0m\n" "$1"; }
 
-# ---------- 1. Xcode (must come from the App Store — can't be scripted) ----------
+# ---------- 1. Xcode (must come from the App Store, can't be scripted) ----------
 if [ ! -d /Applications/Xcode.app ]; then
   bold "STEP 1 of 2: Install Xcode first (the only manual step)."
   echo "Opening the App Store page now. Click 'Get' / 'Install' (~12 GB, takes a while)."
@@ -21,6 +21,14 @@ xcodebuild -runFirstLaunch || true
 
 bold "Downloading the iOS simulator runtime (skipped if already present)..."
 xcrun simctl list runtimes | grep -q iOS || xcodebuild -downloadPlatform iOS
+
+# ---------- 1b. Command Line Tools freshness ----------
+# Outdated standalone CLT blocks Homebrew source builds even when full Xcode is current.
+CLT_LABEL=$(softwareupdate --list 2>/dev/null | grep -oE "Command Line Tools for Xcode [0-9.]+-[0-9.]+" | head -1)
+if [ -n "$CLT_LABEL" ]; then
+  bold "Updating Command Line Tools ($CLT_LABEL)..."
+  softwareupdate --install "$CLT_LABEL" 2>&1 | tail -1 || true
+fi
 
 # ---------- 2. Homebrew ----------
 if ! command -v brew >/dev/null 2>&1 && [ ! -x /opt/homebrew/bin/brew ]; then
@@ -38,14 +46,14 @@ brew tap facebook/fb || true
 brew trust facebook/fb 2>/dev/null || true   # Homebrew 6+ requires trusting third-party taps
 brew install idb-companion || true
 pipx ensurepath || true
-# fb-idb breaks on Python 3.12+ (removed asyncio API) — pin to 3.11
+# fb-idb breaks on Python 3.12+ (removed asyncio API), so pin to 3.11
 pipx install --python "$(brew --prefix python@3.11)/bin/python3.11" fb-idb 2>/dev/null || true
 pipx runpip fb-idb install Pillow 2>/dev/null || true
 python3 -m pip install --user Pillow 2>/dev/null || true
 
 # ---------- 4. Agent API keys file (optional, for image-gen / in-app agents) ----------
 if [ ! -f ~/.agent-env ]; then
-  bold "Creating ~/.agent-env — paste your API keys in later (optional)."
+  bold "Creating ~/.agent-env. Paste your API keys in later (optional)."
   cat > ~/.agent-env <<'EOF'
 # Agent-scoped API keys, sourced by your shell so coding agents never have to ask.
 # Fill in only what you need. Get keys from each provider's console.
@@ -59,7 +67,7 @@ fi
 # ---------- 5. Verify everything ----------
 bold "Verifying the toolchain..."
 xcodebuild -version | head -1
-xcrun simctl list devices available | grep -m1 iPhone || echo "NOTE: no iPhone simulators yet — open Xcode once, it will create them."
+xcrun simctl list devices available | grep -m1 iPhone || echo "NOTE: no iPhone simulators yet. Open Xcode once and it will create them."
 ffmpeg -version | head -1
 command -v idb_companion >/dev/null && echo "idb_companion: OK" || echo "idb_companion: MISSING"
 command -v idb >/dev/null && echo "idb client: OK" || echo "idb client: restart Terminal, then check 'idb --help'"

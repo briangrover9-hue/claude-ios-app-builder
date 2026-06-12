@@ -1,23 +1,23 @@
 # Source article: "Building a beautiful iOS app with 3 Claude Fable prompts"
 
 Author: 12-year Apple UI/UX veteran. Original post: https://x.com/anshuc/status/2064573467182412103
-This is the proven approach this skill replicates. The verbatim prompts below are the templates — adapt the app concept, keep the structure and instructions.
+This is the proven approach this skill replicates. The verbatim prompts below are the templates: adapt the app concept, keep the structure and instructions.
 
 ## The author's learnings (verbatim distillation)
 
-- **The highest-leverage instruction**: tell Claude to directly manipulate the simulator and test its work, verifying every interaction and transition. In the design pass, tell it to verify every frame and pixel. Don't specify how — it figures it out (brew installs idb for simulated touch, ffmpeg/ffprobe to record and dump frames, custom Python/PIL scripts for pixel diffs, crops, zoom analysis to fix pops and hitches).
+- **The highest-leverage instruction**: tell Claude to directly manipulate the simulator and test its work, verifying every interaction and transition. In the design pass, tell it to verify every frame and pixel. Don't specify how; it figures it out (brew installs idb for simulated touch, ffmpeg/ffprobe to record and dump frames, custom Python/PIL scripts for pixel diffs, crops, zoom analysis to fix pops and hitches).
 - "The most important thing is setting the intent and expectation that you want a flawless, smooth, hitch-free interface, and that it needs to actually verify this. The model is smart enough to figure out the details, but you have to actually tell it to verify animations at the frame level."
 - Have a clear idea of the app and explain the parts you actually care about, while leaving the rest open-ended on purpose.
 - Instruct extreme meticulousness about details, transitions, and "delight."
 - Give a rough workflow including documenting work (intent, not just outcomes) so it doesn't lose track across compactions and multiple agent threads.
-- The second design pass works because the model runs with full attention on aesthetics — no functional architecture competing for focus.
+- The second design pass works because the model runs with full attention on aesthetics, with no functional architecture competing for focus.
 - Hyperbole about Apple design quality ("Apple Design Award", "something Alan Dye would use") helps a little.
 - Specific steering ("the alternating layout is a bit cheesy. Simplify, go more image-centric") is the fastest way to kill the worst visual issues.
-- "Pixel-perfect, every transition flawless frame-to-frame" is the single most important Phase 2 instruction — it's what makes the model actually record and dump frames and work until transitions are fluid.
+- "Pixel-perfect, every transition flawless frame-to-frame" is the single most important Phase 2 instruction; it's what makes the model actually record and dump frames and work until transitions are fluid.
 - Setup: empty folder, Claude Code in terminal, no Xcode GUI needed (just xcodebuild/xcrun), agent-scoped API keys in a .env sourced by .zshrc. ~1-1.5M tokens, ~4 hours, <5 min human involvement.
 - "The model goes very far with very little, but you sadly do still have to do the thinking. Give it ways to check its own work and you will be surprised by what it can do with a single prompt."
 
-## Prompt 1 — the one-shot build (verbatim)
+## Prompt 1: the one-shot build (verbatim)
 
 > I want you to build an iOS calorie tracker app. Should have a super clean, minimalist design, very design-forward and aesthetic. Sweat all the tiny details and make everything feel super premium. Make every interaction extremely delightful - you can go so far as to write custom Metal shaders, custom UI components, etc, to make everything fluid, unique, delightful.
 >
@@ -29,7 +29,7 @@ This is the proven approach this skill replicates. The verbatim prompts below ar
 >
 > Start by initializing git, make commits as you go, keep yourself organized with docs so you don't lose track. Write clean, maintainable, modular code.
 
-## Prompt 2 — the 100x design pass (verbatim)
+## Prompt 2: the 100x design pass (verbatim)
 
 > This is a great start but people on X are complaining it looks like AI slop because of the generic gradients, visual glitches, and awkward layout structure. So you need to cook hard and prove them wrong. I want you to 100x the design - get every pixel perfect, every transition flawless frame to frame.
 >
@@ -37,7 +37,7 @@ This is the proven approach this skill replicates. The verbatim prompts below ar
 >
 > Everything is on the table. Want to write your own components from scratch? Do it. Build a game engine for all I care. Write the most god forsaken Metal shaders the world has ever seen. Just make it look absurdly good. Don't stop until it looks like something Alan Dye would use. Make NO mistakes
 
-## Prompt 3 — specific steering (verbatim examples)
+## Prompt 3: specific steering (verbatim examples)
 
 > Consider a model that can do transparency properly. Make the high level grid view look nicer too; the alternating layout is a bit cheesy. Simplify, go more image-centric
 >
