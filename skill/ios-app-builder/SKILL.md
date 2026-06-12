@@ -49,6 +49,16 @@ Design direction while you audit:
 
 Show the user what you built: how to run it, screenshots/recording paths, and what you verified. Invite specific steering ("the grid view is cheesy, go more image-centric" level of feedback) and apply it with the same frame-level verification loop. Specific steering is the fastest way to kill the worst remaining visual issues — incorporate it aggressively.
 
+## Phase 4 — Due diligence (learned from shipping a real product with this skill)
+
+These checks came from a real founder-driven build. Run them without being asked:
+
+1. **Audit against the sources.** If the user gave you documents (a business plan, a brand system, a prototype), re-read them after building and verify every stated promise against the code: BUILT / PARTIAL / MISSING, with evidence. Your synthesis step compresses with a point of view, and a point of view always cuts something. Find what you cut.
+2. **The confession check.** Before any "done" report, answer honestly: what do you already know is wrong, unverified, or quietly parked that the user hasn't caught? Unreviewed generated images, never-tested-on-hardware features (haptics do not exist in the simulator), demo affordances visible in investor builds, incoherent mock-data worlds. List them unprompted. The user asking "what did you miss?" and getting real answers means this check failed.
+3. **The closed-loop test.** An app that builds identity but never pays it off isn't a product. Ask: does the demo close the loop the product exists for? If the user's materials describe a marketplace, both sides of the value exchange must be felt, even mock.
+4. **Copy voice sweep, last.** After all copy exists: no em dashes in UI strings (rewrite the sentence), no AI-tell vocabulary (seamless, delve, elevate, journey, "isn't just X, it's Y"). Voice target: how a confident founder texts, not how a landing page sells.
+5. **Keep a punch-list contract.** Scope decisions live in a committed doc the user can audit, with an explicit "consciously deferred, because" section. Deferral is fine; silent deferral is not.
+
 ## Invocation
 
 `/ios-app-builder <app idea, with the parts the user cares about spelled out>`

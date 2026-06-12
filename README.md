@@ -8,7 +8,9 @@ This repo is the reusable process, packaged as a [Claude Code](https://claude.co
 2. **100x the design** in a second pass: record video of every flow, dump frames with ffmpeg, write pixel-diff scripts, and loop until every transition is flawless frame to frame.
 3. **Steer** with your taste notes. You look at real screens and say what feels off. That part stays human.
 
-The method is distilled from [this post by @anshuc](https://x.com/anshuc/status/2064573467182412103), a 12-year Apple UI/UX veteran who built a calorie tracker this way on Claude Fable 5's launch day. The prompts in `skill/ios-app-builder/reference-article.md` are his, shared with attribution. The packaging, setup automation, and process hardening are mine (well, mine and Claude's).
+The core method is distilled from [this post by @anshuc](https://x.com/anshuc/status/2064573467182412103), a 12-year Apple UI/UX veteran who built a calorie tracker this way on Claude Fable 5's launch day. The build prompts in `skill/ios-app-builder/reference-article.md` are his, shared with attribution.
+
+What's new here came from actually shipping a product with this skill as a non-coder: the setup automation, and Phase 4 of the skill — a due-diligence layer the original method doesn't have. Audit the build against every source document you gave the agent. Make the agent confess what it knows is wrong before you find it. Test whether the demo closes the product's loop. Sweep the copy for AI voice. Those checks exist because each one caught something real during a one-day build of an actual startup's demo app.
 
 ## What you need
 
