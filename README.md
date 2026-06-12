@@ -1,6 +1,14 @@
 # Build a native iOS app with Claude Code. No coding required.
 
-I don't write code. I used this skill to build a complete, polished, native SwiftUI iOS app in one day: five tabs, custom Metal shaders, AI-generated imagery, frame-audited animations, installed on my actual iPhone. My total hands-on time was a few prompts and some taste notes.
+I don't write code. The day Claude Fable 5 launched, I read a post by a 12-year Apple UI/UX veteran who built a calorie tracker with three prompts, and decided to teach myself to do the same thing from scratch. Two one-day builds later, I can run an iOS build the way a designer runs a studio: agents do the engineering, I do the taste.
+
+What that actually produces, built in one day by someone who has never written Swift:
+
+https://github.com/briangrover9-hue/claude-ios-app-builder/raw/main/demo/placemat-demo.mp4
+
+A complete dining product: data-computed onboarding that names your taste archetype, a recommendation engine with per-person reasoning, a scored map, a hosting mode that builds menus around allergies and orders the groceries, and a bill that splits itself with the tax and tip math exact to the cent. Five surfaces, generated photography, a code-drawn brand and logo, every animation frame-audited. ([The video](demo/placemat-demo.mp4) is in this repo; demo data throughout, integrations simulated.)
+
+My total hands-on time across the build was steering: a few prompts and blunt taste notes.
 
 This repo is the reusable process, packaged as a [Claude Code](https://claude.com/claude-code) skill. It is not a template or a starter app. It teaches the agent a working method:
 
