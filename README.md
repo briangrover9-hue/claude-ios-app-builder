@@ -11,7 +11,17 @@ This repo is the reusable process, packaged as a [Claude Code](https://claude.co
 
 The core method is distilled from [this post by @anshuc](https://x.com/anshuc/status/2064573467182412103), a 12-year Apple UI/UX veteran who built a calorie tracker this way on Claude Fable 5's launch day. The build prompts in `skill/ios-app-builder/reference-article.md` are his, shared with attribution.
 
-What's new here came from actually shipping a product with this skill as a non-coder: the setup automation, and Phase 4 of the skill, a due-diligence layer the original method doesn't have. Audit the build against every source document you gave the agent. Make the agent confess what it knows is wrong before you find it. Test whether the demo closes the product's loop. Sweep the copy for AI voice. Those checks exist because each one caught something real during a one-day build of an actual startup's demo app.
+What's new here came from actually shipping products with this skill as a non-coder, across two full one-day builds. From the first: the setup automation, and Phase 4 of the skill, a due-diligence layer the original method doesn't have. Audit the build against every source document you gave the agent. Make the agent confess what it knows is wrong before you find it. Test whether the demo closes the product's loop. Sweep the copy for AI voice.
+
+The second build added the layers that separate a pretty demo from something that reads like a funded product:
+
+- **An operating model.** The main session stays conversational while background agents do the heavy work in parallel, each in its own git worktree with its own simulator. One tree owner at a time, commits after every green build, and liveness checks on a clock, because agents sometimes die silently and an uncommitted hour is an hour you lose.
+- **A premium design playbook.** Ten concrete recipes (no true gray, color rationing, scroll-aware scrims, count-up numbers, ceremony choreography, phase-machine correctness, staggered entrances, shared elements, whisper/shout typography, shader prewarming) that turn "make it look like an Apple Design Award app" from a wish into a checklist.
+- **Wireframe intake.** When you provide mockups or reference designs, the agent treats them as spec: match the structure, upgrade the fidelity, and confess every place it drifted before you find it.
+- **Generated imagery as a requirement, not a nice-to-have.** For visual concepts the skill now stops and asks for an image key instead of silently shipping flat vector art that reads like a template.
+- **Demo craft that holds up on camera.** Lived-in seed data with story arcs hidden in it, deterministic choreography you can rehearse, real brand context, and a bezel-framed golden-path reel as the deliverable.
+
+Every one of those exists because its absence cost real time on a real build.
 
 ## What you need
 
